@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Taller Automotriz</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+    <!-- BARRA SUPERIOR CON FRANJA NEGRA Y BOTÓN ROJO -->
+    <nav class="navbar d-flex justify-content-between align-items-center px-4 py-3" style="background-color: #0f172a !important; border-bottom: 2px solid #1e293b;">
+        <div class="d-flex align-items-center gap-2">
+            <i class="fa-solid fa-wrench text-primary fs-4"></i>
+            <h4 class="m-0 fw-bold text-white">Panel de Administración</h4>
+        </div>
+        <div>
+            <button onclick="cerrarSesion()" class="btn btn-sm fw-bold px-3" style="background-color: #dc3545 !important; color: #ffffff !important; border: none; border-radius: 6px;">
+                Cerrar Sesión
+            </button>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="container my-5">
+
+        <!-- TABLA DE SOLICITUDES -->
+        <div class="card card-datatable p-4 mb-4">
+            <h4 class="fw-bold text-dark mb-3">Gestión de Solicitudes y Diagnósticos</h4>
+            
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="small fw-bold text-secondary">
+                    Mostrar 
+                    <select id="selectRegistros" class="form-select form-select-sm d-inline-block w-auto">
+                        <option value="10">10</option>
+                    </select> registros
+                </div>
+                <div class="small fw-bold text-secondary">
+                    Buscar: <input type="text" id="inputBuscar" class="form-control form-control-sm d-inline-block w-auto" placeholder="Cliente, vehículo...">
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-corporate align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>CLIENTE</th>
+                            <th>TELÉFONO</th>
+                            <th>VEHÍCULO / PLACA</th>
+                            <th>KM</th>
+                            <th>FALLA INICIAL</th>
+                            <th>ESTADO</th>
+                            <th class="text-center">ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaAdminSolicitudes">
+                        <!-- Generado por admin.js -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TABLA DE VALIDACIÓN DE USUARIOS -->
+        <div class="card card-datatable p-4">
+            <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-users-gear me-2"></i> Validación y Asignación de Roles</h5>
+            <div class="table-responsive">
+                <table class="table table-corporate align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>NOMBRE COMPLETO</th>
+                            <th>USUARIO</th>
+                            <th>ASIGNAR ROL</th>
+                            <th>ESTADO</th>
+                            <th class="text-center">ACCIÓN</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaUsuariosPendientes">
+                        <!-- Generado por admin.js -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DIAGNÓSTICO -->
+    <div class="modal fade" id="modalDiagnostico" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-3 border-0 shadow-lg rounded-4">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold text-primary"><i class="fa-solid fa-stethoscope me-2"></i> Diagnóstico Mecánico</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formDiagnostico">
+                        <input type="hidden" id="diagIndex">
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-dark">Sistema / Componente a Reparar (Listbox):</label>
+                            <select id="selectSistemaReparar" class="form-select form-select-sm fw-bold">
+                                <option value="Sistema de Frenos">Sistema de Frenos (Discos y Pastillas)</option>
+                                <option value="Motor y Afinación">Motor y Afinación (Bujías y Aceite)</option>
+                                <option value="Suspensión y Dirección">Suspensión y Dirección (Amortiguadores)</option>
+                                <option value="Transmisión y Embrague">Transmisión y Embrague (Clutch y Caja)</option>
+                                <option value="Sistema Eléctrico">Sistema Eléctrico (Batería y Sensores)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-dark">Observaciones Técnicas:</label>
+                            <textarea id="diagObservaciones" class="form-control form-control-sm" rows="3" placeholder="Detalles de la revisión..."></textarea>
+                        </div>
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary btn-sm fw-bold px-4">Guardar Diagnóstico</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL NUEVA SOLICITUD -->
+    <div class="modal fade" id="modalNuevaSolicitud" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-3 border-0 shadow-lg rounded-4">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold text-primary">Registrar Nueva Solicitud</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formNuevaSolicitud">
+                        <div class="row g-2 mb-2">
+                            <div class="col-md-6"><input type="text" id="solCliente" class="form-control form-control-sm" placeholder="Cliente" required></div>
+                            <div class="col-md-6"><input type="text" id="solTelefono" class="form-control form-control-sm" placeholder="Teléfono" required></div>
+                        </div>
+                        <div class="row g-2 mb-2">
+                            <div class="col-md-5"><input type="text" id="solVehiculo" class="form-control form-control-sm" placeholder="Vehículo" required></div>
+                            <div class="col-md-4"><input type="text" id="solPlaca" class="form-control form-control-sm" placeholder="Placa" required></div>
+                            <div class="col-md-3"><input type="text" id="solKm" class="form-control form-control-sm" placeholder="Km" required></div>
+                        </div>
+                        <div class="mb-3"><textarea id="solFalla" class="form-control form-control-sm" rows="2" placeholder="Falla inicial" required></textarea></div>
+                        <div class="text-end"><button type="submit" class="btn btn-primary btn-sm fw-bold px-4">Guardar</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+
+body {
+    background: linear-gradient(rgba(59, 54, 61, 0.75), rgba(15, 23, 42, 0.85)), 
+                url('https://img.magnific.com/foto-gratis/fondo-textura-pintura-liquida-veteada-textura-abstracta-pintura-fluida-papel-tapiz-mezcla-colores-intensivos_1258-85284.jpg?semt=ais_hybrid&w=740&q=80') center/cover no-repeat;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #4f5761;
+    margin: 0;
+}
+
+.card {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.45) !important;
+    border-top: 5px solid #eb2592;
+    padding: 2.5rem !important;
+    transition: transform 0.3s ease;
+}
+
+.card h3 {
+    color:#0f172a;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.card p.text-muted {
+    color: #64748b !important;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+}
+
+.form-control {
+    background-color: #aadfec;
+    border: 1.5px solid #849ab6;
+    border-radius: 10px;
+    padding: 12px 15px;
+    font-size: 0.95rem;
+    color: rgb(8, 11, 17);
+    transition: all 0.25s ease;
+}
+
+.form-control:focus {
+    background-color: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+    
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.35);
+    transition: all 0.25s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(99deg, #1d4ed8 0%, #1e40af 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.45);
+}
+
+.card {
+    color: #2563eb;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.card a:hover {
+    color: #1e40af;
+    text-decoration: underline !important;
+}

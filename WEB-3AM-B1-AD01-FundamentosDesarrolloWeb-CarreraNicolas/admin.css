@@ -1,0 +1,53 @@
+.card-datatable {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+}
+
+.card-datatable h4, .card-datatable h5, .card-datatable th, .card-datatable td {
+    font-weight: 700 !important;
+    color: #0f172a !important;
+}
+
+.table-corporate thead th {
+    background-color: #f1f5f9;
+    color: #334155 !important;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    border-bottom: 2px solid #cbd5e1;
+    padding: 12px 10px;
+}
+
+.table-corporate tbody tr:hover {
+    background-color: #eff6ff !important;
+    box-shadow: inset 4px 0 0 #2563eb;
+}
+
+.table-corporate tbody td {
+    color: #1e293b !important;
+    font-size: 0.9rem;
+    padding: 12px 10px;
+}
+
+.btn-diagnostico {
+    background-color: #198754;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.78rem;
+    border: none;
+    border-radius: 6px;
+    padding: 5px 10px;
+}
+.btn-diagnostico:hover { background-color: #157347; color: #fff; }
+
+.btn-acciones {
+    background-color: #f59e0b;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.78rem;
+    border: none;
+    border-radius: 6px;
+    padding: 5px 10px;
+}
+.btn-acciones:hover { background-color: #d97706; color: #fff; }
